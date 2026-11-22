@@ -4,7 +4,6 @@ export class RegisterDto {
     @IsEmail({}, { message: 'Email inválido' })
     email: string;
 
-  // 12 como mínimo, igual que la documentación y la diapositiva 17
     @IsString()
     @MinLength(12)
     @MaxLength(128)
@@ -25,4 +24,11 @@ export class LoginDto {
 
     @IsString()
     password: string;
+    
 }
+
+export class RefreshDto {
+    @IsString({ message: 'refreshToken debe ser un texto' })
+    @IsNotEmpty({ message: 'refreshToken es requerido' })
+    refreshToken: string;
+    }

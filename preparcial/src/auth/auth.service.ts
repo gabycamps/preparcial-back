@@ -56,4 +56,12 @@ export class AuthService {
         // Devuelve { accessToken, refreshToken, expiresIn } (expiresIn en segundos)
         return this.tokens.issue(user.id, { method: 'password' });
     }
+
+    refresh(refreshToken: string) {
+        return this.tokens.refresh(refreshToken);
+    }
+
+    logout(refreshToken: string) {
+        return this.tokens.revoke(refreshToken);
+    }
 }
