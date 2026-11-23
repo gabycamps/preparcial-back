@@ -5,8 +5,6 @@ import { AuthenticationModule, type Duration } from '@nestjs/authentication';
 import { AuthorizationModule } from '@nestjs/authorization';
 import { User } from './entities/user.entity.js';
 import { Role } from './entities/role.entity.js';
-import { CreateTables1700000000000 } from './migrations/1700000000000-CreateTables.js';
-import { SeedAdmin1700000000001 } from './migrations/1700000000001-SeedAdmin.js';
 import { UsersModule } from './users/users.module.js';
 import { RolesModule } from './roles/roles.module.js';
 import { AuthModule } from './auth/auth.module.js';
@@ -25,7 +23,6 @@ import { AuthModule } from './auth/auth.module.js';
             database: config.getOrThrow<string>('DB_NAME'),
             entities: [User, Role],
             synchronize: false, // el esquema lo crean las migraciones, no TypeORM
-            migrations: [CreateTables1700000000000, SeedAdmin1700000000001],
             migrationsRun: true, // al arrancar, corre las migraciones pendientes
         }),
         }),

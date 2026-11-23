@@ -29,7 +29,7 @@ SELECT id, role_name, description FROM roles ORDER BY role_name;
 
 -- Cada usuario con sus roles (sin el password)
 SELECT u.email, u.name, u.is_active,
-       COALESCE(string_agg(r.role_name, ', ' ORDER BY r.role_name), '(sin roles)') AS roles
+      COALESCE(string_agg(r.role_name, ', ' ORDER BY r.role_name), '(sin roles)') AS roles
 FROM users u
 LEFT JOIN users_roles ur ON ur.user_id = u.id
 LEFT JOIN roles r ON r.id = ur.role_id
