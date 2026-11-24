@@ -11,7 +11,6 @@ cp .env.example .env     # llenar las variables (abajo)
 npm run start:dev        # http://localhost:3000
 ```
 
-Al arrancar, las migraciones (`src/migrations/`) crean las tablas y el admin. Usuarios de prueba extra (opcional):
 
 ```powershell
 Get-Content sql\usuarios-roles.sql -Encoding UTF8 | docker exec -i pg-preparcial psql -U postgres -d preparcial
@@ -29,7 +28,6 @@ Contraseña de todos: `Admin-Preparcial-2026`
 | `admin@preparcial.com` | admin |
 | `supervisor@preparcial.com`, `supervisor2@preparcial.com` | supervisor |
 | `usuario1@preparcial.com`, `usuario2@preparcial.com` | usuario |
-| `auditor@preparcial.com` | auditor |
 | `multirol@preparcial.com` | supervisor y usuario |
 | `usuario@preparcial.com` | (sin roles) |
 | `inactivo@preparcial.com` | (sin roles, desactivado: el login responde 423) |
@@ -86,7 +84,7 @@ En la policy (`src/roles/roles.policy.ts` o `src/users/users.policy.ts`). El adm
 
 ```ts
 list(user: User | null) {
-  return hasRole(user, 'supervisor', 'auditor');   // src/auth/has-role.ts
+  return hasRole(user, 'supervisor');   // src/auth/has-role.ts
 }
 ```
 
@@ -96,7 +94,7 @@ La ruta usa la regla: `@Can(RolesPolicy, 'list')`. Una policy nueva va en `provi
 
 1. Entidad en `src/entities/` y agregarla a `entities: [...]` en `src/app.module.ts`.
 2. En su módulo: `TypeOrmModule.forFeature([Entidad])`; en el servicio: `@InjectRepository(Entidad)`.
-3. Crear la tabla: `CREATE TABLE` en `sql/estructura.sql` o una migración nueva (clase con número mayor, agregada a `migrations: [...]`). En desarrollo, `synchronize: true` y `migrationsRun: false` mientras tanto.
+3. Crear la tabla: `CREATE TABLE` en `sql/estructura.sql`
 4. Módulo nuevo: agregarlo a `imports` de `src/app.module.ts`.
 
 ## Cosas que fallan seguido

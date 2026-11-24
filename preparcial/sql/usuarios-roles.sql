@@ -6,8 +6,7 @@
 INSERT INTO roles (role_name, description) VALUES
   ('admin', 'Administrador'),
   ('supervisor', 'Supervisor'),
-  ('usuario', 'Usuario'),
-  ('auditor', 'Auditor')
+  ('usuario', 'Usuario')
 ON CONFLICT (role_name) DO NOTHING;
 
 -- 2. Usuarios base (password = hash scrypt generado con el PasswordHasher de @nestjs/authentication)
@@ -24,7 +23,6 @@ FROM (VALUES
   ('usuario1@preparcial.com',    'Usuario Uno',       '3001112233', true),
   ('usuario2@preparcial.com',    'Usuario Dos',       '3004445566', true),
   ('supervisor2@preparcial.com', 'Sofia Supervisora', NULL,         true),
-  ('auditor@preparcial.com',     'Andres Auditor',    NULL,         true),
   ('multirol@preparcial.com',    'Marta Multirol',    '3007778899', true),
   ('inactivo@preparcial.com',    'Ivan Inactivo',     NULL,         false)
 ) AS v(email, name, phone, is_active)
@@ -40,7 +38,6 @@ FROM (VALUES
   ('usuario1@preparcial.com',    'usuario'),
   ('usuario2@preparcial.com',    'usuario'),
   ('supervisor2@preparcial.com', 'supervisor'),
-  ('auditor@preparcial.com',     'auditor'),
   ('multirol@preparcial.com',    'supervisor'),
   ('multirol@preparcial.com',    'usuario')
 ) AS v(email, role_name)

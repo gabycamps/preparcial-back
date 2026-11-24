@@ -4,6 +4,7 @@ import { hasRole } from '../auth/has-role.js';
 
 @Policy()
 export class UsersPolicy implements PolicyBefore<User> {
+  // Corre antes de cada regla: el admin las pasa todas.
     before(user: User | null) {
         if (hasRole(user, 'admin')) return true;
     }
@@ -14,5 +15,10 @@ export class UsersPolicy implements PolicyBefore<User> {
 
     assignRoles(_user: User | null) {
         return false;
+    }
+
+    // ver un usuario por id. Solo el supervisor (el admin ya pasó en before()).
+    findOne(user: User | null) {
+        return hasRole(user, 'supervisor');
     }
 }

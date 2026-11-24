@@ -22,6 +22,14 @@ export class UsersController {
     return this.users.findAllWithRoles();
   }
 
+  // ver un usuario por id. Solo supervisor (y admin por before()).
+  // Debe ir DESPUES de 'me': si no, /users/me caeria aqui y 'me' no es un uuid.
+  @Get(':id')
+  @Can(UsersPolicy, 'findOne')
+  findOne(@Param('id', ParseUUIDPipe) id: string) {
+    return this.users.getProfile(id);
+  }
+
   @Patch(':id/roles') // 200 por defecto
   @Can(UsersPolicy, 'assignRoles')
   assignRoles(@Param('id', ParseUUIDPipe) id: string, @Body() dto: AssignRolesDto) {
