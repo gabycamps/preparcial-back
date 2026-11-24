@@ -24,11 +24,15 @@ Get-Content sql\usuarios-roles.sql -Encoding UTF8 | docker exec -i pg-preparcial
 
 Contraseña de todos: `Admin-Preparcial-2026`
 
-| Correo | Rol |
+| Correo | Roles |
 |---|---|
 | `admin@preparcial.com` | admin |
-| `supervisor@preparcial.com` | supervisor |
-| `usuario@preparcial.com` | (sin rol) |
+| `supervisor@preparcial.com`, `supervisor2@preparcial.com` | supervisor |
+| `usuario1@preparcial.com`, `usuario2@preparcial.com` | usuario |
+| `auditor@preparcial.com` | auditor |
+| `multirol@preparcial.com` | supervisor y usuario |
+| `usuario@preparcial.com` | (sin roles) |
+| `inactivo@preparcial.com` | (sin roles, desactivado: el login responde 423) |
 
 ## Endpoints
 
