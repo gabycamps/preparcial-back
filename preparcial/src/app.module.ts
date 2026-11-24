@@ -23,7 +23,6 @@ import { AuthModule } from './auth/auth.module.js';
             database: config.getOrThrow<string>('DB_NAME'),
             entities: [User, Role],
             synchronize: false, // el esquema lo crean las migraciones, no TypeORM
-            migrationsRun: true, // al arrancar, corre las migraciones pendientes
         }),
         }),
         AuthenticationModule.forRootAsync({
