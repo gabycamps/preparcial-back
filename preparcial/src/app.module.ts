@@ -8,6 +8,8 @@ import { Role } from './entities/role.entity.js';
 import { UsersModule } from './users/users.module.js';
 import { RolesModule } from './roles/roles.module.js';
 import { AuthModule } from './auth/auth.module.js';
+import { SpotsModule } from './spots/spots.module.js';
+import { ReservationsModule } from './reservations/reservations.module.js';
 
 @Module({
     imports: [
@@ -22,7 +24,7 @@ import { AuthModule } from './auth/auth.module.js';
             password: config.getOrThrow<string>('DB_PASS'),
             database: config.getOrThrow<string>('DB_NAME'),
             entities: [User, Role],
-            synchronize: false,
+            synchronize: true,
         }),
         }),
         AuthenticationModule.forRootAsync({
@@ -42,6 +44,8 @@ import { AuthModule } from './auth/auth.module.js';
         UsersModule,
         RolesModule,
         AuthModule,
+        SpotsModule,
+        ReservationsModule,
     ],
 })
 export class AppModule {}
