@@ -22,7 +22,7 @@ import { AuthModule } from './auth/auth.module.js';
             password: config.getOrThrow<string>('DB_PASS'),
             database: config.getOrThrow<string>('DB_NAME'),
             entities: [User, Role],
-            synchronize: false, // el esquema lo crean las migraciones, no TypeORM
+            synchronize: false,
         }),
         }),
         AuthenticationModule.forRootAsync({

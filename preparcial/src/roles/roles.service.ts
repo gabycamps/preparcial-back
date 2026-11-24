@@ -41,4 +41,22 @@ export class RolesService {
         throw new InternalServerErrorException('Error al obtener roles');
         }
     }
+
+    async deleteById(id: string) {
+        try {
+        const result = await this.repo.delete(id);
+        if (result.affected === 0) {
+            throw new ConflictException('Rol no encontrado');
+        }
+        return { message: 'Rol eliminado con éxito' };
+        } catch (error) {
+        if (
+            error instanceof QueryFailedError &&
+            (error.driverError as { code?: string }).code === '23503'
+        ) {
+            throw new ConflictException('No se puede eliminar el rol: está asignado a usuarios');
+        }
+        throw error;
+        }
+    }
 }

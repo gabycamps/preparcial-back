@@ -23,6 +23,12 @@ Get-Content sql\usuarios-roles.sql -Encoding UTF8 | docker exec -i pg-preparcial
 
 Contraseña de todos: `Admin-Preparcial-2026`
 
+admin
+{
+    "email": "ej@gmail.com",
+    "password": "123456789000"
+}
+
 | Correo | Roles |
 |---|---|
 | `admin@preparcial.com` | admin |

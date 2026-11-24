@@ -82,4 +82,17 @@ export class UsersService {
         await this.repo.save(user);
         return { message: 'Roles asignados' };
     }
+
+    async deleteById(id: string) {
+        try {
+        const result = await this.repo.delete(id);
+        if (result.affected === 0) {
+            throw new NotFoundException('Usuario no encontrado');
+        }
+        return { message: 'Usuario eliminado con éxito' };
+        } catch (error) {
+        throw error;
+        }
+    }
+
 }

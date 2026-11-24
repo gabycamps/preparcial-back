@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, ParseUUIDPipe, Patch } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, ParseUUIDPipe, Patch } from '@nestjs/common';
 import { CurrentUser } from '@nestjs/authentication';
 import { Can } from '@nestjs/authorization';
 import { UsersPolicy } from './users.policy.js';
@@ -34,5 +34,11 @@ export class UsersController {
   @Can(UsersPolicy, 'assignRoles')
   assignRoles(@Param('id', ParseUUIDPipe) id: string, @Body() dto: AssignRolesDto) {
     return this.users.assignRoles(id, dto.roles);
+  }
+
+  @Delete(':id') // 200 por defecto
+  @Can(UsersPolicy, 'assignRoles')
+  deleteById(@Param('id', ParseUUIDPipe) id: string) {
+    return this.users.deleteById(id);
   }
 }

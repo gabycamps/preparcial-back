@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, ParseUUIDPipe, Post } from '@nestjs/common';
 import { Can } from '@nestjs/authorization';
 import { RolesPolicy } from './roles.policy.js';
 import { RolesService } from './roles.service.js';
@@ -18,5 +18,11 @@ export class RolesController {
     @Can(RolesPolicy, 'list')
     findAll() {
         return this.roles.findAll();
+    }
+
+    @Delete(':id') // 200 por defecto
+    @Can(RolesPolicy, 'create')
+    deleteById(@Param('id', ParseUUIDPipe) id: string) {
+        return this.roles.deleteById(id);
     }
 }
